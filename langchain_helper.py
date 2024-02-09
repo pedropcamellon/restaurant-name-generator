@@ -3,16 +3,14 @@ from langchain_community.llms import HuggingFaceHub
 from langchain.chains import LLMChain
 from langchain.chains import SequentialChain
 from langchain.prompts import PromptTemplate
+from typing import Dict
 
 load_dotenv()
 
-repo_id = "google/flan-t5-xxl"  # See https://huggingface.co/models?pipeline_tag=text-generation&sort=downloads for some other options
-
-# repo_id=repo_id, model_kwargs={"temperature": 0.7, "max_length": 50}
-llm = HuggingFaceHub(repo_id=repo_id)
+llm = HuggingFaceHub(repo_id="google/flan-t5-xxl")
 
 
-def generate_restaurant_name_and_items(cuisine):
+def generate_restaurant_name_and_items(cuisine: str) -> Dict[str, str]:
     restaurant_name_prompt_template = PromptTemplate(
         input_variables=["cuisine"],
         template="I want to open a restaurant for {cuisine} cuisine. Suggest a good restaurant name.",

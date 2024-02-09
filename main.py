@@ -7,9 +7,9 @@ Also could generate a random menu items for that restaurant.
 import streamlit as st
 from langchain_helper import generate_restaurant_name_and_items
 
-st.title("Restaruant Name Generator")
+st.title("Restaurant Name Generator")
 
-st.sidebar.header("This is my sidebar")
+st.sidebar.header("Cusine:")
 
 cuisine = st.sidebar.selectbox("Pick up a cusine", ("Mexican", "American", "Chinese"))
 
@@ -39,7 +39,7 @@ if cuisine:
             menu_items = menu_items[0:3]
 
     except KeyError:
-        pass
+        print("KeyError when trying to get menu items")
 
     if len(menu_items) != 0:
         # Display menu
