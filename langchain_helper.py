@@ -1,19 +1,19 @@
 from dotenv import load_dotenv
-from langchain_community.llms import HuggingFaceHub
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import LLMChain
 from langchain.chains import SequentialChain
 from langchain.prompts import PromptTemplate
-from typing import Dict
 
 load_dotenv()
 
-llm = HuggingFaceHub(repo_id="google/flan-t5-xxl")
+
+llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
 
 
-def generate_restaurant_name_and_items(cuisine: str) -> Dict[str, str]:
+def generate_restaurant_name_and_items(cuisine: str) -> dict[str, str]:
     restaurant_name_prompt_template = PromptTemplate(
         input_variables=["cuisine"],
-        template="I want to open a restaurant for {cuisine} cuisine. Suggest a good restaurant name.",
+        template="I want to open a restaurant for {cuisine} cuisine. Suggest a good restaurant name. Response must include only the name of the restaurant.",
     )
 
     restaurant_name_chain = LLMChain(
@@ -25,7 +25,7 @@ def generate_restaurant_name_and_items(cuisine: str) -> Dict[str, str]:
 
     food_items_prompt_template = PromptTemplate(
         input_variables=["restaurant_name"],
-        template="Suggest three items to include in a menu for a restaurant called {restaurant_name}. Return the items as comma separated list",
+        template="Provide three items as comma separated list to include in a menu for a restaurant called {restaurant_name}. Response must include only the items.",
     )
 
     food_items_chain = LLMChain(

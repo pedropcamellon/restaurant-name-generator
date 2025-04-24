@@ -1,9 +1,3 @@
-"""
-Restaurant Name Generator app.
-The user selects a cusine and gets a list of restaurant names that serve that cusine.
-Also could generate a random menu items for that restaurant.
-"""
-
 import streamlit as st
 from langchain_helper import generate_restaurant_name_and_items
 
