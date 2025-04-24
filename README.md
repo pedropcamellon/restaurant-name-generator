@@ -37,10 +37,10 @@ This project is a comprehensive implementation of an application for generating 
 
 ### 2. Loading Environment Variables
 
-1. Obtain a HuggingFace API token from [HuggingFace](https://huggingface.co/).
+1. Obtain a Google Generative AI API key from [here](https://aistudio.google.com/apikey)
 2. Create a `.env` file in the project directory and add your token:
    ```env
-   HUGGINGFACEHUB_API_TOKEN=your_token_here
+   GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
    ```
 
 ### 3. Running the Application
