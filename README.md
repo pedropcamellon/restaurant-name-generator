@@ -16,6 +16,10 @@ This project is a comprehensive implementation of an application for generating 
 - **Streamlit**: Tool for building and deploying web applications.
 - **HuggingFace Hub**: Source for pre-trained LLMs.
 
+## Screenshot
+
+![Screenshot](restaurant_name_generator.png)
+
 ## Setup Instructions
 
 ### 1. Setting Up the Environment
