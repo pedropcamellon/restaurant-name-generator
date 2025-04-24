@@ -1,43 +1,44 @@
 import streamlit as st
-from langchain_helper import generate_restaurant_name_and_items
+from generator import generate_restaurant_name
 
-st.title("Restaurant Name Generator")
 
-st.sidebar.header("Cusine:")
+def main():
+    st.set_page_config(
+        page_title="Restaurant Name Generator",
+        page_icon="🍽️",
+    )
 
-cuisine = st.sidebar.selectbox("Pick up a cusine", ("Mexican", "American", "Chinese"))
+    st.title("🏪 Restaurant Name Generator")
 
-restaurant_name = st.text_input("Enter a restaurant name")
+    # Add a sidebar with information
+    with st.sidebar:
+        st.header("About")
+        st.write("Generate unique restaurant names based on cuisine type using AI.")
 
-if cuisine:
-    response = generate_restaurant_name_and_items(cuisine)
+    # Main content
+    cuisines = [
+        "Italian",
+        "Mexican",
+        "Chinese",
+        "Indian",
+        "Japanese",
+        "American",
+        "French",
+        "Thai",
+    ]
+    cuisine = st.selectbox("Select a cuisine type:", cuisines)
 
-    # Display restaurant name
-    if restaurant_name:
-        st.header(restaurant_name)
-    else:
-        st.header(response["restaurant_name"])
+    if st.button("Generate Restaurant Name", type="primary"):
+        with st.spinner("Generating restaurant name..."):
+            # Generate restaurant name
+            restaurant_name = generate_restaurant_name(cuisine)
 
-    # Display menu items
-    menu_items = []
+            if restaurant_name:
+                st.header(restaurant_name)
 
-    try:
-        print(response["food_items"])
-        menu_items_raw = response["food_items"]
-        menu_items_list = menu_items_raw.split(",")
+            else:
+                st.error("Failed to generate restaurant name. Please try again.")
 
-        menu_items = menu_items_list
 
-        # Truncate menu items to 3
-        if len(menu_items) > 3:
-            menu_items = menu_items[0:3]
-
-    except KeyError:
-        print("KeyError when trying to get menu items")
-
-    if len(menu_items) != 0:
-        # Display menu
-        st.write("Menu:")
-
-        for item in menu_items:
-            st.write("-", item)
+if __name__ == "__main__":
+    main()
